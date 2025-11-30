@@ -3,6 +3,15 @@
     <head>
         <?php
             include '../controladores/home_controlador.php';
+            session_start();
+
+            if (!isset($_SESSION['verificado'])) {
+                echo '<script>
+                        alert("Debes iniciar sesión para acceder a esta página.");
+                        window.location = "vistas/login.php";
+                      </script>';
+                exit();
+            }
         ?>
         <title>Colmado Gamer</title>
         <meta charset="utf-8" />

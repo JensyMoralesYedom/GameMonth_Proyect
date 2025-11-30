@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label>User Name</label>
-                        <input type="text" class="form-control" placeholder="It'ztuRealMenolEnCotiseHD" id="username" name="username">
+                        <input type="text" class="form-control" placeholder="It'ztuRealMenolEnCotiseHD" id="username" name="username" required>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
