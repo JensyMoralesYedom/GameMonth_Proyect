@@ -1,6 +1,18 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <?php
+            include '../controladores/home_controlador.php';
+            session_start();
+
+            if (!isset($_SESSION['verificado'])) {
+                echo '<script>
+                        alert("Debes iniciar sesión para acceder a esta página.");
+                        window.location = "vistas/login.php";
+                      </script>';
+                exit();
+            }
+        ?>
         <title>Colmado Gamer</title>
         <meta charset="utf-8" />
         <meta
@@ -17,8 +29,11 @@
     </head>
 
     <body>
-        <header>
-            <!-- Nav tabs -->
+        <?php
+        include 'header.php';
+        ?>
+        <!-- <header>
+            Nav tabs
             <ul
                 class="nav nav-tabs"
                 id="navId"
@@ -62,7 +77,7 @@
                 </li>
             </ul>
 
-            <!-- Cuadros -->
+            Cuadros
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="tab1Id" role="tabpanel">
                     
@@ -73,18 +88,33 @@
                 <div class="tab-pane fade" id="tab5Id" role="tabpanel"></div>
             </div>
             
-            <!-- (Optional) - Place this js code after initializing bootstrap.min.js or bootstrap.bundle.min.js -->
+            (Optional) - Place this js code after initializing bootstrap.min.js or bootstrap.bundle.min.js
             <script>
                 var triggerEl = document.querySelector("#navId a");
                 bootstrap.Tab.getInstance(triggerEl).show(); // Select tab by name
             </script>
-        </header>
+        </header> -->
 
 
         <main>            
             <div class="container py-4">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
-                    <div class="col m-2">
+                    <?php
+                        $control = new HomeControlador();
+                        $juegos = $control->mostrarDatos();
+                        foreach ($juegos as $juego) {
+                            echo '<div class="col m-2">
+                                    <div class="h-100 m-3 ">
+                                        <img src="' . $juego['Portada'] . '" class="card-img-top custom-img" alt="Producto">
+                                        <div class="card-body m-0 p-0">
+                                        <div class="elemento-centro"><h5 class="card-title d-inline nombre-juego m-1 p-0">' . htmlspecialchars($juego['nombre']) . '</h5><p class=" d-inline m-0 ">' . str_repeat('★', intval($juego['calificacion'])) . str_repeat('☆', 5 - intval($juego['calificacion'])) . '</p></div>
+                                        <div class="elemento-centro"><p class="d-inline m-2 ">$' . "HOLA" . '</p><img class="icono-naranja d-inline ms-auto m-0 mt-2 " width="30" height="30" src="https://img.icons8.com/sf-regular-filled/48/add-shopping-cart.png" alt="add-shopping-cart" style="fill: red;" /> </div>
+                                        </div>
+                                    </div>
+                                </div>';
+                        }   
+                    ?>
+                    <div class="col m-2 border border-danger">
                         <div class="h-100 m-3 ">
                             <img src="placeholderimg.png " class="card-img-top custom-img" alt="Producto">
                             <div class="card-body m-0 p-0">
