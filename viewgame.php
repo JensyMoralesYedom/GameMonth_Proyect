@@ -171,9 +171,11 @@ try {
                     </strong>
                 </p>
 
-                <a href="#" class="buy-btn mt-5 adquirir d-inline-block">
-                    ADQUIRIR AHORA
+                <a href="agregar_biblioteca.php?id=<?= $juego['id'] ?>" 
+                class="buy-btn mt-5 adquirir d-inline-block">
+                ADQUIRIR AHORA
                 </a>
+
             </div>
 
         </div>
@@ -193,3 +195,4 @@ try {
     ></script>
 </body>
 </html>
+
