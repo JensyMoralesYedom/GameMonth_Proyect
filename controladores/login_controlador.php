@@ -19,6 +19,7 @@ class LoginControler
             echo '<script>
                     window.location = "../index.php";
                   </script>';
+
         } elseif(isset($_SESSION['verificado'])) {
             echo '<script>
                     window.location = "../index.php";

@@ -19,7 +19,7 @@ class LoginModelo
         }
         if($resultado){
             
-            if($password == $usuarioRe['password']) {
+            if($password == $usuarioRe['password_hash']) {
                 return $usuarioRe;
             } else {
                 return false;
