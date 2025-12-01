@@ -13,8 +13,15 @@ if (
 // Si el usuario está pendiente, usar ese ID
 if (isset($_SESSION['usuario_pendiente'])) {
     $userId = $_SESSION['usuario_pendiente'];
-} else {
+} elseif (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
+} else {
+    die("Error: No hay sesión de usuario activa");
+}
+
+// Validar que userId es un número válido
+if (!$userId || !is_numeric($userId) || $userId <= 0) {
+    die("Error: ID de usuario inválido: " . htmlspecialchars($userId));
 }
 
 $precio = 10.00;
@@ -48,32 +55,46 @@ paypal.Buttons({
         return actions.order.create({
             purchase_units: [{ amount: { value: "<?= $precio ?>" } }]
         });
-        },
+    },
     onApprove: function(data, actions) {
         return actions.order.capture().then(function(details) {
-        // enviar al backend para registrar pago y activar suscripción
-        fetch("../controladores/paypal_controlador.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            orderID: data.orderID,
-            transactionID: details.id,
-            userID: parseInt("<?= $userId ?>"),  // Convertir a número entero
-            monto: parseFloat("<?= $precio ?>")  // Convertir a número decimal
-        })
-        })
-        .then(r => r.json())
-        .then(resp => {
-            if (resp.status === "ok") {
-            alert("Pago completado");
-            window.location = "gracias.php";
-        } else {
-            alert("Error backend");
-        }
+            // Datos a enviar
+            const payload = {
+                orderID: data.orderID,
+                transactionID: details.id,
+                userID: <?= intval($userId) ?>,
+                monto: <?= floatval($precio) ?>
+            };
+            
+            console.log("Enviando pago:", payload);
+            
+            // Enviar al backend para registrar pago y activar suscripción
+            return fetch("../controladores/paypal_controlador.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(r => r.json())
+            .then(resp => {
+                console.log("Respuesta del servidor:", resp);
+                if (resp.status === "ok") {
+                    alert("✅ Pago completado");
+                    window.location = "gracias.php";
+                } else {
+                    alert("❌ Error backend:\n" + (resp.message || "Error desconocido") + 
+                          (resp.debug ? "\n\nDebug: " + JSON.stringify(resp.debug) : ""));
+                }
+            })
+            .catch(err => {
+                console.error("Error fetch:", err);
+                alert("❌ Error al conectar con el servidor: " + err.message);
+            });
         });
-    });
     },
-    onError: function(err) { console.error(err); alert("Error con PayPal"); }
+    onError: function(err) { 
+        console.error("Error PayPal:", err); 
+        alert("❌ Error con PayPal: " + err.message);
+    }
 }).render('#paypal-button-container');
 </script>
 

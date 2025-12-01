@@ -148,12 +148,13 @@ try {
         http_response_code(500);
         echo json_encode([
             'status' => 'error',
-            'message' => 'No se pudo registrar el pago en la BD.',
+            'message' => 'No se pudo registrar el pago en la BD. Verifica los logs PHP.',
             'debug' => [
                 'userID' => $userID,
                 'id_suscripcion' => $id_suscripcion,
                 'monto' => $monto,
-                'transactionID' => $transactionID
+                'transactionID' => $transactionID,
+                'note' => 'Revisa error_log de PHP para más detalles'
             ]
         ]);
         exit;

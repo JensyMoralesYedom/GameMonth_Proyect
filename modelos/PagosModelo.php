@@ -11,28 +11,33 @@ class PagosModelo {
         try {
             $db = Conexion::conectar();
 
+            // Convertir monto a formato DECIMAL correcto
+            $monto = floatval($monto);
+
             // Ajuste de columnas para coincidir con la tabla 'pagos'
             // La tabla tiene columnas: id_usuario, id_suscripcion, monto, fecha, transaction_id
-            $stmt = $db->prepare("\
-                INSERT INTO pagos (id_usuario, id_suscripcion, monto, fecha, transaction_id)\
-                VALUES (?, ?, ?, NOW(), ?)\
+            $stmt = $db->prepare("
+                INSERT INTO pagos (id_usuario, id_suscripcion, monto, fecha, transaction_id)
+                VALUES (?, ?, ?, NOW(), ?)
             ");
 
             $stmt->bindParam(1, $userID, PDO::PARAM_INT);
             $stmt->bindParam(2, $id_suscripcion, PDO::PARAM_INT);
-            $stmt->bindParam(3, $monto);  // PDO detecta automáticamente el tipo numérico
+            $stmt->bindParam(3, $monto, PDO::PARAM_STR);  // DECIMAL como string
             $stmt->bindParam(4, $transactionID, PDO::PARAM_STR);
 
             $ok = $stmt->execute();
             if (!$ok) {
                 $err = $stmt->errorInfo();
-                error_log("Error ejecutar INSERT pagos: " . implode(' | ', $err));
+                $errorMsg = "SQLSTATE[" . $err[0] . "]: " . $err[1] . " - " . $err[2];
+                error_log("Error INSERT pagos - userID:$userID, suscripcion:$id_suscripcion, monto:$monto, transID:$transactionID");
+                error_log("Error detalles: " . $errorMsg);
                 return false;
             }
             return true;
 
         } catch (PDOException $e) {
-            error_log("Error Modelo Pagos: " . $e->getMessage());
+            error_log("Error Modelo Pagos (PDO): " . $e->getMessage());
             return false;
         }
     }

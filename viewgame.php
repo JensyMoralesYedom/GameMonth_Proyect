@@ -163,13 +163,7 @@ try {
             </p>
 
             <div class="d-flex justify-content-between align-items-center">
-                <p class="precios">
-                    <strong>Precio:
-                        <span class="text-success">
-                            <label class="">$<?= $juego['precio'] ?></label>
-                        </span>
-                    </strong>
-                </p>
+
 
                 <a href="#" class="buy-btn mt-5 adquirir d-inline-block">
                     ADQUIRIR AHORA
