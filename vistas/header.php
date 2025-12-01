@@ -3,7 +3,7 @@
     <header class="sticky-top bg-primary">
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">Mi Web</a>
+                <a class="navbar-brand" href="index.php">El Colmado Gamer</a>
         
                 <!-- Botón hamburguesa en móvil -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">

@@ -13,6 +13,7 @@
                 exit();
             }
         ?>
+        <link rel="icon" type="image/x-icon" href="img/WhatsApp_Image_2025-11-29_at_00.05.29-removebg-preview.ico">
         <title>Colmado Gamer</title>
         <meta charset="utf-8" />
         <meta
@@ -105,60 +106,16 @@
                         foreach ($juegos as $juego) {
                             echo '<div class="col m-2">
                                     <div class="h-100 m-3 ">
-                                        <img src="' . $juego['Portada'] . '" class="card-img-top custom-img" alt="Producto">
+                                        <img src="' . $juego['portada'] . '" class="card-img-top custom-img" alt="Producto">
                                         <div class="card-body m-0 p-0">
-                                        <div class="elemento-centro"><h5 class="card-title d-inline nombre-juego m-1 p-0">' . htmlspecialchars($juego['nombre']) . '</h5><p class=" d-inline m-0 ">' . str_repeat('★', intval($juego['calificacion'])) . str_repeat('☆', 5 - intval($juego['calificacion'])) . '</p></div>
+                                        <div class="elemento-centro"><h5 class="card-title d-inline nombre-juego m-1 p-0">' . htmlspecialchars($juego['titulo']) . '</h5><p class=" d-inline m-0 ">' . str_repeat('★', intval($juego['calificacion'])) . str_repeat('☆', 5 - intval($juego['calificacion'])) . '</p></div>
                                         <div class="elemento-centro"><p class="d-inline m-2 ">$' . "HOLA" . '</p><img class="icono-naranja d-inline ms-auto m-0 mt-2 " width="30" height="30" src="https://img.icons8.com/sf-regular-filled/48/add-shopping-cart.png" alt="add-shopping-cart" style="fill: red;" /> </div>
                                         </div>
                                     </div>
                                 </div>';
                         }   
                     ?>
-                    <div class="col m-2 border border-danger">
-                        <div class="h-100 m-3 ">
-                            <img src="placeholderimg.png " class="card-img-top custom-img" alt="Producto">
-                            <div class="card-body m-0 p-0">
-                            <div class="elemento-centro"><h5 class="card-title d-inline nombre-juego m-1 p-0">Nombre del producto...</h5><p class=" d-inline m-0 ">★★★★☆</p></div>
-                            <div class="elemento-centro"><p class="d-inline m-2 ">$100.00</p><img class="icono-naranja d-inline ms-auto m-0 mt-2 " width="30" height="30" src="https://img.icons8.com/sf-regular-filled/48/add-shopping-cart.png" alt="add-shopping-cart" style="fill: red;" /> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m-2">
-                        <div class="h-100 m-3 ">
-                            <img src="placeholderimg.png " class="card-img-top custom-img" alt="Producto">
-                            <div class="card-body m-0 p-0">
-                            <div class="elemento-centro"><h5 class="card-title d-inline nombre-juego m-0 p-0">Nombre del producto...</h5><p class="card-text mb-0 d-inline m-0 elemento-derecha">★★★★☆</p></div>
-                            <div class="elemento-centro"><p class="d-inline m-2 ">$100.00</p><img class="icono-naranja d-inline ms-auto mt-2 " width="30" height="30" src="https://img.icons8.com/sf-regular-filled/48/add-shopping-cart.png" alt="add-shopping-cart" style="fill: red;" /> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m-2">
-                        <div class="h-100 m-3 ">
-                            <img src="placeholderimg.png " class="card-img-top custom-img" alt="Producto">
-                            <div class="card-body m-0 p-0">
-                            <div class="elemento-centro"><h5 class="card-title d-inline nombre-juego m-0 p-0">Nombre del producto...</h5><p class="card-text mb-0 d-inline m-0 elemento-derecha">★★★★☆</p></div>
-                            <div class="elemento-centro"><p class="d-inline m-2 ">$100.00</p><img class="icono-naranja d-inline ms-auto mt-2 " width="30" height="30" src="https://img.icons8.com/sf-regular-filled/48/add-shopping-cart.png" alt="add-shopping-cart" style="fill: red;" /> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m-2">
-                        <div class="h-100 m-3 ">
-                            <img src="placeholderimg.png " class="card-img-top custom-img" alt="Producto">
-                            <div class="card-body m-0 p-0">
-                            <div class="elemento-centro"><h5 class="card-title d-inline nombre-juego m-0 p-0">Nombre del producto...</h5><p class="card-text mb-0 d-inline m-0 elemento-derecha">★★★★☆</p></div>
-                            <div class="elemento-centro"><p class="d-inline m-2 ">$100.00</p><img class="icono-naranja d-inline ms-auto mt-2 " width="30" height="30" src="https://img.icons8.com/sf-regular-filled/48/add-shopping-cart.png" alt="add-shopping-cart" style="fill: red;" /> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m-2">
-                        <div class="h-100 m-3 ">
-                            <img src="placeholderimg.png " class="card-img-top custom-img" alt="Producto">
-                            <div class="card-body m-0 p-0">
-                            <div class="elemento-centro"><h5 class="card-title d-inline nombre-juego m-0 p-0">Nombre del producto...</h5><p class="card-text mb-0 d-inline m-0 elemento-derecha">★★★★☆</p></div>
-                            <div class="elemento-centro"><p class="d-inline m-2 ">$100.00</p><img class="icono-naranja d-inline ms-auto mt-2 " width="30" height="30" src="https://img.icons8.com/sf-regular-filled/48/add-shopping-cart.png" alt="add-shopping-cart" style="fill: red;" /> </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <!-- Repita este bloque .col para agregar más productos lado a lado -->
                 </div>

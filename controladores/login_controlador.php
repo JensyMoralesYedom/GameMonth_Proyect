@@ -9,8 +9,9 @@ class LoginControler
         $password = $_POST['pass'];
         $usuarioRe = LoginModelo::auntenticar($user, $password);
 
+        session_start();
         if ($usuarioRe) {
-            session_start();
+            
             $_SESSION['verificado'] = 'si';
             $_SESSION['user_id'] = $usuarioRe['id'];
             $_SESSION['username'] = $usuarioRe['usuario'];
@@ -18,10 +19,15 @@ class LoginControler
             echo '<script>
                     window.location = "../index.php";
                   </script>';
-        } else {
+        } elseif(isset($_SESSION['verificado'])) {
+            echo '<script>
+                    window.location = "../index.php";
+                  </script>';
+        } else
+        {
             echo '<script>
                     alert("Error al ingresar, vuelve a intentarlo");
-                    window.location = "login.php";
+                    window.location = "../vistas/login.php";
                   </script>';
         }
 
